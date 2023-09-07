@@ -35,7 +35,7 @@ export const TaskPad = ({
       >
         <Flex>
           <Text
-            as="del"
+            // as={""}
             m={0}
             textOverflow={"ellipsis"}
             whiteSpace={"nowrap"}

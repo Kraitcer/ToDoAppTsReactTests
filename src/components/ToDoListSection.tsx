@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Box, Flex, VStack } from "@chakra-ui/layout";
 import AddTask from "../UI Components/AddTasks";
 import TaskPad from "../UI Components/TaskPad";
-import AllModal from "../UI Components/AllModal";
 import EditTask from "../UI Components/EditTask";
 import { v4 as uuidv4 } from "uuid";
 import EditSubTask from "../UI Components/EditSubTask";
+import Footer from "../UI Components/Footer";
+import { AiOutlineUnorderedList } from "react-icons/ai";
+import { MdDone } from "react-icons/md";
+import { IoTrashBinSharp } from "react-icons/io5";
 
 const ToDoListSection = () => {
   const [isOpen1, setIsOpen1] = useState(false);
@@ -36,7 +39,13 @@ const ToDoListSection = () => {
   const addTodo = (todo: any) => {
     setTodos([
       ...todos,
-      { id: uuidv4(), task: todo, isEditing: false, subTasks: 0 },
+      {
+        id: uuidv4(),
+        task: todo,
+        isEditing: false,
+        active: true,
+        complited: false,
+      },
     ]);
     // console.log(todos);
   };
@@ -45,39 +54,6 @@ const ToDoListSection = () => {
 
   return (
     <>
-      <AllModal
-        size="lg"
-        title={"Edit the task"}
-        onOpen={isOpen1}
-        onClose={closeModal1}
-        children={
-          <EditTask
-            editTask={editTodo}
-            // editTask={(id: string, name) => editTodo(id, name)}
-            subTasksValue={(subTasksValues) => {
-              if (subTasksValues.length > 0) {
-                // console.log("inishall", subTasksValues);
-                setTodos(
-                  todos.map((todo) =>
-                    todo.task === subTasksValues[0].perentTask
-                      ? { ...todo, subTasks: subTasksValues.length }
-                      : todo
-                  )
-                );
-                localStorage.setItem(
-                  `subTask_${subTasksValues[0].perentTask}`,
-                  JSON.stringify(subTasksValues)
-                );
-              }
-            }}
-            task={todos}
-            currentTask={currentTask}
-            onClose={() => {
-              setIsOpen1(false);
-            }}
-          />
-        }
-      />
       <VStack gap={0}>
         <AddTask
           addTodo={addTodo}
@@ -117,7 +93,31 @@ const ToDoListSection = () => {
             )}
           </Flex>
         </Flex>
-        <Flex bg={"blue.400"} w={"100%"} h={16} borderBottomRadius={20}></Flex>
+        <Flex
+          bg={"blue.400"}
+          w={"100%"}
+          h={16}
+          borderBottomRadius={20}
+          justifyContent={"center"}
+          alignItems={"center"}
+          gap={3}
+        >
+          <Footer
+            badge={todos.length}
+            icon={<AiOutlineUnorderedList size={22} />}
+            name={"all"}
+          />
+          <Footer
+            badge={todos.length}
+            icon={<MdDone size={22} />}
+            name={"completed"}
+          />
+          <Footer
+            badge={todos.length}
+            icon={<IoTrashBinSharp size={22} />}
+            name={"trash"}
+          />
+        </Flex>
       </VStack>
     </>
   );

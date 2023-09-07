@@ -1,7 +1,6 @@
 import { Input } from "@chakra-ui/input";
 import { Flex } from "@chakra-ui/layout";
 import { useEffect, useState } from "react";
-import AddSubTask from "./AddSubTask";
 import TaskPad from "./TaskPad";
 import EditSubTask from "./EditSubTask";
 import SectionButton from "./SectionButton";
