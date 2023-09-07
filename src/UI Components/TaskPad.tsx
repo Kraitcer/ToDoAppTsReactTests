@@ -34,22 +34,8 @@ export const TaskPad = ({
         // flexDirection={"raw"}
       >
         <Flex>
-          <Badge
-            display={children > 0 ? "" : "none"}
-            mt={"2px"}
-            w={6}
-            mr={2}
-            p={0}
-            // color={"orange.400"}
-            textAlign={"center"}
-            borderRadius={50}
-            fontSize={"1rem"}
-            // position={"absolute"}
-            colorScheme="purple"
-          >
-            {children > 0 ? children : null}
-          </Badge>
           <Text
+            as="del"
             m={0}
             textOverflow={"ellipsis"}
             whiteSpace={"nowrap"}

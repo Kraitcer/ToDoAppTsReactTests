@@ -5,6 +5,7 @@ import TaskPad from "../UI Components/TaskPad";
 import AllModal from "../UI Components/AllModal";
 import EditTask from "../UI Components/EditTask";
 import { v4 as uuidv4 } from "uuid";
+import EditSubTask from "../UI Components/EditSubTask";
 
 const ToDoListSection = () => {
   const [isOpen1, setIsOpen1] = useState(false);
@@ -37,7 +38,7 @@ const ToDoListSection = () => {
       ...todos,
       { id: uuidv4(), task: todo, isEditing: false, subTasks: 0 },
     ]);
-    console.log(todos);
+    // console.log(todos);
   };
 
   const currentTask = todos.filter((t: any) => t.id == currentTodo);
@@ -51,7 +52,8 @@ const ToDoListSection = () => {
         onClose={closeModal1}
         children={
           <EditTask
-            editTask={(id: string, name) => editTodo(id, name)}
+            editTask={editTodo}
+            // editTask={(id: string, name) => editTodo(id, name)}
             subTasksValue={(subTasksValues) => {
               if (subTasksValues.length > 0) {
                 // console.log("inishall", subTasksValues);
@@ -94,23 +96,25 @@ const ToDoListSection = () => {
             pl={3}
             pt={3}
             pb={2}
-            // pr={6}
-            // wrap={"wrap"}
           >
-            {todos.map((todo, index) => (
-              <TaskPad
-                children={todo.subTasks}
-                width={"76%"}
-                // width={"460px"}
-                onDelete={deleteTask}
-                key={index}
-                task={todo}
-                editTask={(id: string, name: string) => editTodo(id, name)}
-                // editTask={(id) => {
-                //   openModal1(id);
-                // }}
-              />
-            ))}
+            {todos.map((todo, index) =>
+              todo.isEditing ? (
+                <EditSubTask
+                  key={index}
+                  subTasks={todo}
+                  editSubTask={(id: string, name: string) => editTodo(id, name)}
+                />
+              ) : (
+                <TaskPad
+                  children={todo.subTasks}
+                  width={"76%"}
+                  onDelete={deleteTask}
+                  key={index}
+                  task={todo}
+                  editTask={(id: string, name: string) => editTodo(id, name)}
+                />
+              )
+            )}
           </Flex>
         </Flex>
         <Flex bg={"blue.400"} w={"100%"} h={16} borderBottomRadius={20}></Flex>

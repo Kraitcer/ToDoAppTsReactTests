@@ -15,12 +15,13 @@ export const EditSubTask = ({ subTasks, editSubTask }: Props) => {
     // prevent default action
     e.preventDefault();
     // edit todo
-    editSubTask(value, subTasks.id);
+    editSubTask(subTasks.id, value);
   };
   return (
     <form onSubmit={handleSubmit} className="TodoForm">
-      <Flex>
+      <Flex w={"88%"}>
         <Input
+          bg={"white"}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           borderLeftRadius={10}
@@ -29,7 +30,7 @@ export const EditSubTask = ({ subTasks, editSubTask }: Props) => {
         <Flex
           bg={"orange.300"}
           h={10}
-          w={"70px"}
+          w={"75px"}
           pt={2}
           pl={4}
           // pr={3}
