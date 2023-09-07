@@ -21,9 +21,7 @@ const ToDoListSection = () => {
   const editTodo = (id: string, currentTaskName: string) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id
-          ? { ...todo, isEditing: !todo.isEditing, task: currentTaskName }
-          : todo
+        todo.id === id ? { ...todo, task: currentTaskName } : todo
       )
     );
   };
@@ -82,33 +80,28 @@ const ToDoListSection = () => {
           placeHolder="Choose New Task"
           buttonName="Add Task"
         />
-        <Flex w={"560px"} h={"34rem"} mb={0}>
+        <Flex w={"560px"} h={"34rem"} flexDirection={"row"} mb={0}>
           <Flex
-            flexDirection={"column"}
             overflowY={"auto"}
             bg={"blue.100"}
             w={"100%"}
-            h={"100%"}
             borderTopRadius={20}
             gap={2}
             pl={3}
             pt={3}
             pb={2}
-            // pr={6}
-            // wrap={"wrap"}
+            wrap={"wrap"}
           >
             {todos.map((todo, index) => (
               <TaskPad
                 children={todo.subTasks}
-                width={"76%"}
-                // width={"460px"}
+                width={"190px"}
                 onDelete={deleteTask}
                 key={index}
                 task={todo}
-                editTask={(id: string, name: string) => editTodo(id, name)}
-                // editTask={(id) => {
-                //   openModal1(id);
-                // }}
+                editTask={(id) => {
+                  openModal1(id);
+                }}
               />
             ))}
           </Flex>

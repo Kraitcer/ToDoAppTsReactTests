@@ -7,7 +7,7 @@ interface Props {
   width: string;
   task: any;
   onDelete: (id: string) => void;
-  editTask: (id: string) => void;
+  editTask: (id: string, name: string) => void;
   children: number;
 }
 
@@ -19,7 +19,7 @@ export const TaskPad = ({
   children,
 }: Props) => {
   return (
-    <HStack gap={0} mr={0} mb={1}>
+    <HStack gap={0} mr={0} mb={1} w={"100%"}>
       <Box
         bg={"blue.400"}
         color={"white"}
@@ -73,7 +73,7 @@ export const TaskPad = ({
             _hover={{ bg: "orange.400" }}
             borderRightRadius={10}
           >
-            <BiEdit onClick={() => editTask(task.id)} />
+            <BiEdit onClick={() => editTask(task.id, task.task)} />
             <IoTrashBinSharp onClick={() => onDelete(task.id)} />
           </Flex>
         </Flex>
