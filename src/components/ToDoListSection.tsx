@@ -31,6 +31,13 @@ const ToDoListSection = () => {
       )
     );
   };
+  const completeTask = (id: string) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, complited: !todo.complited } : todo
+      )
+    );
+  };
 
   const deleteTask = (id: string) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
@@ -88,6 +95,7 @@ const ToDoListSection = () => {
                   key={index}
                   task={todo}
                   editTask={(id: string, name: string) => editTodo(id, name)}
+                  completeTask={(id: string) => completeTask(id)}
                 />
               )
             )}

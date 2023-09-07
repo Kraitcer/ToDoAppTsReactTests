@@ -2,12 +2,14 @@ import { Box, Flex, HStack } from "@chakra-ui/layout";
 import { Badge, Text } from "@chakra-ui/react";
 import { IoTrashBinSharp } from "react-icons/io5/";
 import { BiEdit } from "react-icons/bi";
+import { MdDone } from "react-icons/md";
 
 interface Props {
   width: string;
   task: any;
   onDelete: (id: string) => void;
   editTask: (id: string, name: string) => void;
+  completeTask: (id: string) => void;
   children: number;
 }
 
@@ -15,8 +17,8 @@ export const TaskPad = ({
   task,
   onDelete,
   editTask,
+  completeTask,
   width,
-  children,
 }: Props) => {
   return (
     <HStack gap={0} mr={0} mb={1} w={"100%"}>
@@ -35,7 +37,7 @@ export const TaskPad = ({
       >
         <Flex>
           <Text
-            // as={""}
+            as={task.complited === true ? "del" : undefined}
             m={0}
             textOverflow={"ellipsis"}
             whiteSpace={"nowrap"}
@@ -50,7 +52,7 @@ export const TaskPad = ({
           <Flex
             bg={"orange.300"}
             h={10}
-            w={16}
+            w={"96px"}
             pt={3}
             pl={3}
             pr={3}
@@ -60,6 +62,7 @@ export const TaskPad = ({
             borderRightRadius={10}
           >
             <BiEdit onClick={() => editTask(task.id, task.task)} />
+            <MdDone onClick={() => completeTask(task.id)} />
             <IoTrashBinSharp onClick={() => onDelete(task.id)} />
           </Flex>
         </Flex>
