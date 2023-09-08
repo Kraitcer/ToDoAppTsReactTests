@@ -1,8 +1,10 @@
 import { Text, Box, Flex, HStack } from "@chakra-ui/react";
-import { IoTrashBinSharp } from "react-icons/io5/";
-import { BiEdit } from "react-icons/bi";
-import { MdDone } from "react-icons/md";
-import { FaTrashRestoreAlt } from "react-icons/fa";
+import {
+  FaTrashRestoreAlt,
+  IoTrashBinSharp,
+  BiEdit,
+  MdDone,
+} from "../utilities/icons";
 
 interface Props {
   width: string;

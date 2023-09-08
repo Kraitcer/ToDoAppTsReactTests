@@ -5,7 +5,7 @@ interface Props {
   onClick: () => void;
 }
 
-const SectionButton = ({ buttonName, onClick }: Props) => {
+export const SectionButton = ({ buttonName, onClick }: Props) => {
   return (
     <Button
       colorScheme="orange"

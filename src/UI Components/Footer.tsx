@@ -8,7 +8,7 @@ interface FooterProps {
   onClick: () => void;
 }
 
-const Footer = ({ badge, icon, name, onClick }: FooterProps) => {
+export const Footer = ({ badge, icon, name, onClick }: FooterProps) => {
   return (
     <>
       <Flex

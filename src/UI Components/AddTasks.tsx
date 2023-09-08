@@ -1,7 +1,6 @@
-import { Input } from "@chakra-ui/input";
-import { Flex } from "@chakra-ui/layout";
-import React, { useState } from "react";
-import SectionButton from "./SectionButton";
+import { Input, Flex } from "@chakra-ui/react";
+import { useState } from "react";
+import { SectionButton } from "../utilities/uicomponents";
 
 interface Prop {
   addTodo: (data: string) => void;
@@ -9,7 +8,7 @@ interface Prop {
   buttonName: string;
 }
 
-const AddTask = ({ addTodo, placeHolder, buttonName }: Prop) => {
+export const AddTask = ({ addTodo, placeHolder, buttonName }: Prop) => {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e: any) => {

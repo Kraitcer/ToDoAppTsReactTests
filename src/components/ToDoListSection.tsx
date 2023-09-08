@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { Flex, VStack } from "@chakra-ui/layout";
-import AddTask from "../UI Components/AddTasks";
-import TaskPad from "../UI Components/TaskPad";
 import { v4 as uuidv4 } from "uuid";
-import EditSubTask from "../UI Components/EditSubTask";
-import Footer from "../UI Components/Footer";
-import { AiOutlineUnorderedList } from "react-icons/ai";
-import { MdDone, MdOutlineNotificationsActive } from "react-icons/md";
+import { Flex, VStack } from "@chakra-ui/layout";
+import {
+  MdDone,
+  MdOutlineNotificationsActive,
+  AiOutlineUnorderedList,
+} from "../utilities/icons";
+import {
+  AddTask,
+  TaskPad,
+  EditSubTask,
+  Footer,
+} from "../utilities/uicomponents";
 
 interface todos {
   id: string;
