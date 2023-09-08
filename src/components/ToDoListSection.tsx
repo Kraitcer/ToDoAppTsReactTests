@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Box, Flex, VStack } from "@chakra-ui/layout";
+import { useState } from "react";
+import { Flex, VStack } from "@chakra-ui/layout";
 import AddTask from "../UI Components/AddTasks";
 import TaskPad from "../UI Components/TaskPad";
-import EditTask from "../UI Components/EditTask";
 import { v4 as uuidv4 } from "uuid";
 import EditSubTask from "../UI Components/EditSubTask";
 import Footer from "../UI Components/Footer";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { MdDone, MdOutlineNotificationsActive } from "react-icons/md";
 
+interface todos {
+  id: string;
+  task: string;
+  isEditing: boolean;
+  active: boolean;
+  complited: boolean;
+}
+
 const ToDoListSection = () => {
-  const [todos, setTodos] = useState<any[]>([]);
+  const [todos, setTodos] = useState<todos[]>([]);
 
   const [renderFilter, setRenderFilter] = useState("all");
 
@@ -21,6 +28,8 @@ const ToDoListSection = () => {
       ? todos.filter((t) => t.active === true)
       : todos.filter((t) => t.complited === true);
 
+  // ========================================================EDIT=============================
+
   const editTodo = (id: string, currentTaskName: string) => {
     setTodos(
       todos.map((todo) =>
@@ -30,6 +39,7 @@ const ToDoListSection = () => {
       )
     );
   };
+  // ========================================================COMPLETE=============================
   const completeTask = (id: string) => {
     setTodos(
       todos.map((todo) =>
@@ -39,11 +49,15 @@ const ToDoListSection = () => {
       )
     );
   };
+  const complitedTask = todos.filter((t: todos) => t.complited == true);
 
+  // ========================================================DELETE=============================
   const deleteTask = (id: string) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
   };
+
+  // ========================================================ADD=============================
   const addTodo = (todo: any) => {
     setTodos([
       ...todos,
@@ -58,8 +72,7 @@ const ToDoListSection = () => {
     // console.log(todos);
   };
 
-  const complitedTask = todos.filter((t: any) => t.complited == true);
-  const activeTask = todos.filter((t: any) => t.active == true);
+  const activeTask = todos.filter((t: todos) => t.active == true);
 
   return (
     <>
@@ -91,7 +104,6 @@ const ToDoListSection = () => {
                 />
               ) : (
                 <TaskPad
-                  children={todo.subTasks}
                   width={"76%"}
                   onDelete={deleteTask}
                   key={index}

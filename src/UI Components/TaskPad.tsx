@@ -1,5 +1,4 @@
-import { Box, Flex, HStack } from "@chakra-ui/layout";
-import { Badge, Text } from "@chakra-ui/react";
+import { Text, Box, Flex, HStack } from "@chakra-ui/react";
 import { IoTrashBinSharp } from "react-icons/io5/";
 import { BiEdit } from "react-icons/bi";
 import { MdDone } from "react-icons/md";
@@ -11,7 +10,7 @@ interface Props {
   onDelete: (id: string) => void;
   editTask: (id: string, name: string) => void;
   completeTask: (id: string) => void;
-  children: number;
+  // children: number;
 }
 
 export const TaskPad = ({

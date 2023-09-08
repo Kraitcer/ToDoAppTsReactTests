@@ -1,6 +1,5 @@
-import { Input } from "@chakra-ui/input";
-import { Box, Flex } from "@chakra-ui/layout";
-import React, { useState } from "react";
+import { Input, Flex } from "@chakra-ui/react";
+import { useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 interface Props {

@@ -1,4 +1,4 @@
-import { Flex, Text, Badge, background } from "@chakra-ui/react";
+import { Flex, Text, Badge } from "@chakra-ui/react";
 import React from "react";
 
 interface FooterProps {
@@ -21,7 +21,7 @@ const Footer = ({ badge, icon, name, onClick }: FooterProps) => {
         p={2}
         borderRadius={20}
         cursor={"pointer"}
-        _hover={{ bg: "orange.400", color: "white" }}
+        _hover={{ bg: "blue.200" }}
         onClick={onClick}
       >
         <Badge borderRadius={50} h={8} w={8} pt={1.5}>
