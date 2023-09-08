@@ -5,9 +5,10 @@ interface FooterProps {
   badge: number;
   icon: React.ReactNode;
   name: string;
+  onClick: () => void;
 }
 
-const Footer = ({ badge, icon, name }: FooterProps) => {
+const Footer = ({ badge, icon, name, onClick }: FooterProps) => {
   return (
     <>
       <Flex
@@ -21,6 +22,7 @@ const Footer = ({ badge, icon, name }: FooterProps) => {
         borderRadius={20}
         cursor={"pointer"}
         _hover={{ bg: "orange.400", color: "white" }}
+        onClick={onClick}
       >
         <Badge borderRadius={50} h={8} w={8} pt={1.5}>
           {badge}

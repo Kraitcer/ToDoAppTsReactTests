@@ -7,20 +7,19 @@ import { v4 as uuidv4 } from "uuid";
 import EditSubTask from "../UI Components/EditSubTask";
 import Footer from "../UI Components/Footer";
 import { AiOutlineUnorderedList } from "react-icons/ai";
-import { MdDone } from "react-icons/md";
-import { IoTrashBinSharp } from "react-icons/io5";
+import { MdDone, MdOutlineNotificationsActive } from "react-icons/md";
 
 const ToDoListSection = () => {
-  const [isOpen1, setIsOpen1] = useState(false);
-  const closeModal1 = () => setIsOpen1(false);
-  const openModal1 = (id: string) => {
-    setIsOpen1(true);
-    setCurrentTodo(id);
-  };
-
   const [todos, setTodos] = useState<any[]>([]);
 
-  const [currentTodo, setCurrentTodo] = useState<string>();
+  const [renderFilter, setRenderFilter] = useState("all");
+
+  const visibleTodos =
+    renderFilter === "all"
+      ? todos
+      : renderFilter === "active"
+      ? todos.filter((t) => t.active === true)
+      : todos.filter((t) => t.complited === true);
 
   const editTodo = (id: string, currentTaskName: string) => {
     setTodos(
@@ -34,7 +33,9 @@ const ToDoListSection = () => {
   const completeTask = (id: string) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, complited: !todo.complited } : todo
+        todo.id === id
+          ? { ...todo, complited: !todo.complited, active: !todo.active }
+          : todo
       )
     );
   };
@@ -57,7 +58,8 @@ const ToDoListSection = () => {
     // console.log(todos);
   };
 
-  const currentTask = todos.filter((t: any) => t.id == currentTodo);
+  const complitedTask = todos.filter((t: any) => t.complited == true);
+  const activeTask = todos.filter((t: any) => t.active == true);
 
   return (
     <>
@@ -80,7 +82,7 @@ const ToDoListSection = () => {
             pt={3}
             pb={2}
           >
-            {todos.map((todo, index) =>
+            {visibleTodos.map((todo, index) =>
               todo.isEditing ? (
                 <EditSubTask
                   key={index}
@@ -111,19 +113,22 @@ const ToDoListSection = () => {
           gap={3}
         >
           <Footer
+            onClick={() => setRenderFilter("all")}
             badge={todos.length}
             icon={<AiOutlineUnorderedList size={22} />}
             name={"all"}
           />
           <Footer
-            badge={todos.length}
-            icon={<MdDone size={22} />}
-            name={"completed"}
+            onClick={() => setRenderFilter("active")}
+            badge={activeTask.length}
+            icon={<MdOutlineNotificationsActive size={22} />}
+            name={"active"}
           />
           <Footer
-            badge={todos.length}
-            icon={<IoTrashBinSharp size={22} />}
-            name={"trash"}
+            onClick={() => setRenderFilter("completed")}
+            badge={complitedTask.length}
+            icon={<MdDone size={22} />}
+            name={"completed"}
           />
         </Flex>
       </VStack>
