@@ -91,6 +91,7 @@ const ToDoListSection = () => {
                 />
               ) : (
                 <TaskPad
+                  visibleMode={renderFilter}
                   children={todo.subTasks}
                   width={"76%"}
                   onDelete={deleteTask}

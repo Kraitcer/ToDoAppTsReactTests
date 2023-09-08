@@ -3,8 +3,10 @@ import { Badge, Text } from "@chakra-ui/react";
 import { IoTrashBinSharp } from "react-icons/io5/";
 import { BiEdit } from "react-icons/bi";
 import { MdDone } from "react-icons/md";
+import { FaTrashRestoreAlt } from "react-icons/fa";
 
 interface Props {
+  visibleMode: string;
   width: string;
   task: any;
   onDelete: (id: string) => void;
@@ -14,6 +16,7 @@ interface Props {
 }
 
 export const TaskPad = ({
+  visibleMode,
   task,
   onDelete,
   editTask,
@@ -62,7 +65,11 @@ export const TaskPad = ({
             borderRightRadius={10}
           >
             <BiEdit onClick={() => editTask(task.id, task.task)} />
-            <MdDone onClick={() => completeTask(task.id)} />
+            {visibleMode === "completed" ? (
+              <FaTrashRestoreAlt onClick={() => completeTask(task.id)} />
+            ) : (
+              <MdDone onClick={() => completeTask(task.id)} />
+            )}
             <IoTrashBinSharp onClick={() => onDelete(task.id)} />
           </Flex>
         </Flex>
