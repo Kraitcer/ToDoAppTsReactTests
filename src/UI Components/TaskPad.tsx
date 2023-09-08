@@ -6,7 +6,6 @@ import { MdDone } from "react-icons/md";
 import { FaTrashRestoreAlt } from "react-icons/fa";
 
 interface Props {
-  visibleMode: string;
   width: string;
   task: any;
   onDelete: (id: string) => void;
@@ -16,7 +15,6 @@ interface Props {
 }
 
 export const TaskPad = ({
-  visibleMode,
   task,
   onDelete,
   editTask,
@@ -65,7 +63,7 @@ export const TaskPad = ({
             borderRightRadius={10}
           >
             <BiEdit onClick={() => editTask(task.id, task.task)} />
-            {visibleMode === "completed" ? (
+            {task.complited ? (
               <FaTrashRestoreAlt onClick={() => completeTask(task.id)} />
             ) : (
               <MdDone onClick={() => completeTask(task.id)} />
