@@ -12,13 +12,9 @@ export const AddTask = ({ addTodo, placeHolder, buttonName }: Prop) => {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e: any) => {
-    // prevent default action
     e.preventDefault();
     if (value) {
-      // console.log("value");
-      // add todo
       addTodo(value);
-      // clear form after submission
       setValue("");
     }
   };
@@ -34,12 +30,7 @@ export const AddTask = ({ addTodo, placeHolder, buttonName }: Prop) => {
           onChange={(e) => setValue(e.target.value)}
         />
         <Flex>
-          <SectionButton
-            buttonName={buttonName}
-            onClick={() => {
-              // console.log(value);
-            }}
-          />
+          <SectionButton buttonName={buttonName} onClick={() => {}} />
         </Flex>
       </Flex>
     </form>
