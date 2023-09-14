@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Flex, VStack } from "@chakra-ui/layout";
 import {
@@ -12,6 +12,13 @@ import {
   EditSubTask,
   Footer,
 } from "../utilities/uicomponents";
+import useTodos, { Todo } from "../hooks/useTodos";
+import axios from "axios";
+
+interface OldTodos {
+  title: string;
+  complited: boolean;
+}
 
 interface todos {
   id: string;
@@ -22,7 +29,26 @@ interface todos {
 }
 
 const ToDoListSection = () => {
+  useEffect(() => {
+    axios
+      .get<any>("https://jsonplaceholder.typicode.com/todos")
+      .then((res) =>
+        setTodos(
+          res.data.map((arr: OldTodos) => ({
+            id: uuidv4(),
+            task: arr.title,
+            isEditing: false,
+            active: true,
+            complited: arr.complited,
+          }))
+        )
+      )
+      .catch((err) => console.log(err.message));
+  }, []);
+  // const { data: oldTodos } = useTodos<Todo>([]);
   const [todos, setTodos] = useState<todos[]>([]);
+
+  // console.log(todos);
 
   const [renderFilter, setRenderFilter] = useState("all");
 
@@ -54,7 +80,7 @@ const ToDoListSection = () => {
       )
     );
   };
-  const complitedTask = todos.filter((t: todos) => t.complited == true);
+  const completedTask = todos.filter((t: todos) => t.complited == true);
 
   // ========================================================DELETE=============================
   const deleteTask = (id: string) => {
@@ -65,7 +91,6 @@ const ToDoListSection = () => {
   // ========================================================ADD=============================
   const addTodo = (todo: any) => {
     setTodos([
-      ...todos,
       {
         id: uuidv4(),
         task: todo,
@@ -73,6 +98,7 @@ const ToDoListSection = () => {
         active: true,
         complited: false,
       },
+      ...todos,
     ]);
     // console.log(todos);
   };
@@ -143,7 +169,7 @@ const ToDoListSection = () => {
           />
           <Footer
             onClick={() => setRenderFilter("completed")}
-            badge={complitedTask.length}
+            badge={completedTask.length}
             icon={<MdDone size={22} />}
             name={"completed"}
           />
